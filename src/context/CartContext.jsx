@@ -1,24 +1,40 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const CartContext = createContext();
 
-const CartContextProvider = ({children}) => {
-  const [cart, setCart] = useState([]);
+const initialState = {
+  cart: [], 
+  total: 0,
+  precio: 0,
+};
 
-  const agregarAlCarrito = () => {
-    console.log("se agrego")
-  };
+const cartReducer = (state, action) => {
+  // action = {type, payload}
+
+  switch (action.type) {
+    case "addToCart":
+      return {...state,  cart: [...state.cart, action.payload] };
+    case "deleteById":
+      let newArray = state.cart.filter(
+        (product) => product.id !== action.payload
+      );
+      return { ...state, cart: newArray };
+    default:
+      return state;
+  }
+};
+
+const CartContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(cartReducer, initialState);
 
   let data = {
-    cart,
-    agregarAlCarrito,
+    dispatch,
+    cart: state.cart,
+    total: state.total,
+    precio: state.precio
   };
 
-  return (
-    <CartContext.Provider value={data}>
-      {children}
-      </CartContext.Provider>
-  );
+  return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
 };
 
 export default CartContextProvider;

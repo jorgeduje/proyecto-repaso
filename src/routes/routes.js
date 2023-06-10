@@ -1,6 +1,7 @@
 import Cart from "../components/pages/cart/Cart";
 import Home from "../components/pages/home/Home";
-import ProductsList from "../components/pages/productsList/ProductsList";
+import ProductListContainer from "../components/pages/productsList/ProductListContainer";
+
 
 export const routes = [
   {
@@ -11,7 +12,7 @@ export const routes = [
   {
     id: "productList",
     path: "/products",
-    Element: ProductsList,
+    Element: ProductListContainer ,
   },
   {
     id: "cart",
