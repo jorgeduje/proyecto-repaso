@@ -1,10 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { CartContext } from "../../../context/CartContext";
+import { addToCart } from "../../../store/cartSlice";
+import { useDispatch } from "react-redux";
+
+
 
 const ProductsList = () => {
 
-  const { agregarAlCarrito } = useContext(CartContext);
+  const dispatch = useDispatch()
 
   const [products, setProducts] = useState([]);
 
@@ -30,7 +33,7 @@ const ProductsList = () => {
           <div key={id}>
             <h2>{title}</h2>
             <img src={image} alt=""  style={{width: "200px"}}/>
-            <button onClick={agregarAlCarrito}>Agregar</button>
+            <button onClick={()=>dispatch( addToCart({id, title, image}) ) }>Agregar</button>
           </div>
         );
       })}

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -7,6 +7,7 @@ const Navbar = () => {
         <li>Productos</li>
         <li>About</li>
         <li>contacto</li>
+        <Link to="/cart">Carrito</Link>
       </ul>
   
     </div>

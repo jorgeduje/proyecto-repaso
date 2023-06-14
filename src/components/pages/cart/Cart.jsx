@@ -1,18 +1,27 @@
-import { useContext } from "react"
-import { CartContext } from "../../../context/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { removeById } from "../../../store/cartSlice";
 
 
 const Cart = () => {
-
-   const {cart} = useContext(CartContext);
-   console.log(cart)
-   
+  
+  const dispatch = useDispatch()
+  const { cart } = useSelector((store) => store.cart);
 
   return (
     <div>
-        <h1>Estoy en el carrito</h1>
-    </div>
-  )
-}
+      <Link to="/">home</Link>
+      <h1>Estoy en el carrito</h1>
 
-export default Cart
+      {cart.map((prod) => (
+        <div key={prod.id}>
+          <h3>{prod.title}</h3>
+          <img src={prod.image} alt="" />
+          <button onClick={()=>dispatch( removeById(prod.id) )}>Eliminar</button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Cart;
