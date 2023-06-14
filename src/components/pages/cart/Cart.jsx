@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeById } from "../../../store/cartSlice";
-
+import { clearCart, removeById } from "../../../store/cartSlice";
 
 const Cart = () => {
   
@@ -12,6 +11,7 @@ const Cart = () => {
     <div>
       <Link to="/">home</Link>
       <h1>Estoy en el carrito</h1>
+      <button onClick={()=> dispatch( clearCart() )}>Limpiar carrito</button>
 
       {cart.map((prod) => (
         <div key={prod.id}>
